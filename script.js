@@ -1,31 +1,69 @@
-const choices = ['rock','paper','scissors'];
-const buttons = document.querySelectorAll('[data-selection]');
-buttons.forEach(button => {
-    button.addEventListener('click', e => {
-        const buttonName = button.dataset.options
-        
-    }) 
-})
-function getComputerChoice() {
-     let options = choices[Math.floor(Math.random() * 3)];
-     return options;
-}
+const rock = document.querySelector('.rock');
+const paper = document.querySelector('.paper');
+const scissors = document.querySelector('.scissors');
 
+rock.addEventListener('click', () => {
+    playRound('rock', getComputerChoice());
+});
+
+paper.addEventListener('click', () => {
+    playRound('paper', getComputerChoice());
+});
+
+scissors.addEventListener('click', () => {
+    playRound('scissors', getComputerChoice());
+});
+console.log(rock)
+
+   function getComputerChoice() {
+     let computerChoices = Math.floor(Math.random() * 3);
+     let computerChoice;
+     switch(computerChoices) {
+        case 0:
+            computerChoice = 'rock'
+            break;
+        case 1:
+            computerChoice = 'paper'
+            break;
+        case 2:
+            computerChoice = 'scissors'
+            break;
+     }
+     return computerChoice;
+    }
 
 
 function playRound(playerSelection, computerSelection) {
-     if (playerSelection === computerSelection) {
-        return 'Tie'
-     }
-     else if ((playerSelection === 'rock' && computerSelection === 'scissors') || (playerSelection === 'scissors' && computerSelection === 'paper') ||
-        (playerSelection === 'paper' && computerSelection === 'rock')) {
-            return 'Player'
-        }
-        else {
-            return 'Computer'
-        }
-        
-    }
+
+  if (playerSelection === computerSelection) {
+    roundWinner = 'tie';
+  }
+
+  if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper') ||
+    (playerSelection === 'paper' && computerSelection === 'rock')
+  ) {
+    pScore.dataset.score = parseInt(pScore.dataset.score) + 1;
+    pScore.textContent = "PLAYER:" + pScore.dataset.score;
+    roundWinner = 'player';
+  }
+  if (
+    (computerSelection === 'rock' && playerSelection === 'scissors') ||
+    (computerSelection === 'scissors' && playerSelection === 'paper') ||
+    (computerSelection === 'paper' && playerSelection === 'rock')
+  ) {
+    cScore.dataset.score = parseInt(cScore.dataset.score) + 1;
+    cScore.textContent = "COMPUTER:" + cScore.dataset.score;
+    roundWinner = 'computer';
+  }
+  console.log("Computer: " + computerSelection + ", Player: " + playerSelection + ", Winner: " + roundWinner + ".");
+  updateScoreMessage(roundWinner, playerSelection, computerSelection);
+}
+
+
+    
+    
     function checkWinner(playerSelection, computerSelection) {
             const result = playRound(playerSelection, computerSelection);
             if (result === 'Tie') {
@@ -37,32 +75,5 @@ function playRound(playerSelection, computerSelection) {
             else {
                 return `You Lose! ${computerSelection} beats ${playerSelection}`
             }
-            
         }
-//       function game() {
-//         let playerScore = 0;
-//         let computerScore = 0;
-//         for (let i = 0; i < 5; i++) {
-//         const playerSelection = getPlayerChoice();
-//          const computerSelection = getComputerChoice();
-//          console.log(checkWinner(playerSelection, computerSelection));
-//          if (playRound(playerSelection, computerSelection) === 'Player') {
-//             playerScore++;
-//          }
-//          else if (playRound(playerSelection, computerSelection) === 'Computer') {
-//             computerScore++;
-//          }
-
-//       }
-//       console.log('Game Over')
-//       if (playerScore > computerScore) {
-//         console.log('Player Wins!')
-//       }
-//       else if (playerScore < computerScore) {
-//         console.log('Computer Wins!')
-//       }
-//       else {
-//         console.log('Tie!')
-//       }
-//     }
-// game();
+   
