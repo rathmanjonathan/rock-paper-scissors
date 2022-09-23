@@ -1,37 +1,25 @@
-const rock = document.querySelector('.rock');
-const paper = document.querySelector('.paper');
-const scissors = document.querySelector('.scissors');
+const rock = document.getElementById("rockBtn");
+const paper = document.getElementById("paperBtn");
+const scissors = document.getElementById("scissorsBtn");
+const playerSign = document.getElementById("playerSign");
+const scoreMessage = document.getElementById("scoreMessage");
+const pScore = document.getElementById("playerScore");
+const cScore = document.getElementById("computerScore");
 
-rock.addEventListener('click', () => {
-    playRound('rock', getComputerChoice());
+rock.addEventListener('click', function() {
+  playerSign.innerHTML = '<img src="./images/Rock.png" alt="Rock"/>';
+  playRound('rock', getRandomChoice());
 });
 
-paper.addEventListener('click', () => {
-    playRound('paper', getComputerChoice());
+paper.addEventListener('click', function() {
+  playerSign.innerHTML = '<img src="./images/Paper.png" alt="Paper"/>';
+  playRound('paper', getRandomChoice());
 });
 
-scissors.addEventListener('click', () => {
-    playRound('scissors', getComputerChoice());
+scissors.addEventListener('click', function() {
+  playerSign.innerHTML = '<img src="./images/Scissors.png" alt="Scissors"/>';
+  playRound('scissors', getRandomChoice());
 });
-console.log(rock)
-
-   function getComputerChoice() {
-     let computerChoices = Math.floor(Math.random() * 3);
-     let computerChoice;
-     switch(computerChoices) {
-        case 0:
-            computerChoice = 'rock'
-            break;
-        case 1:
-            computerChoice = 'paper'
-            break;
-        case 2:
-            computerChoice = 'scissors'
-            break;
-     }
-     return computerChoice;
-    }
-
 
 function playRound(playerSelection, computerSelection) {
 
@@ -61,19 +49,41 @@ function playRound(playerSelection, computerSelection) {
   updateScoreMessage(roundWinner, playerSelection, computerSelection);
 }
 
+function getRandomChoice() {
+  let computerSign = document.getElementById("computerSign");
+  let rndChoice = Math.floor(Math.random() * 3);
+  var txtChoice;
+  switch (rndChoice) {
+    case 0:
+      computerSign.innerHTML = '<img src="./images/Rock.png" alt="Rock"/>';
+      txtChoice = 'rock';
+      break;
+    case 1:
+      computerSign.innerHTML = '<img src="./images/Paper.png" alt="Paper"/>';
+      txtChoice = 'paper';
+      break;
+    case 2:
+      computerSign.innerHTML = '<img src="./images/Scissors.png" alt="Scissors"/>';
+      txtChoice = 'scissors';
+      break;
+  }
+  return txtChoice;
+}
 
-    
-    
-    function checkWinner(playerSelection, computerSelection) {
-            const result = playRound(playerSelection, computerSelection);
-            if (result === 'Tie') {
-                return `It\s a Tie! ${playerSelection} matches ${computerSelection}`
-            }
-            else if (result === 'Player') {
-                return `You Win! ${playerSelection} beats ${computerSelection}`
-            }
-            else {
-                return `You Lose! ${computerSelection} beats ${playerSelection}`
-            }
-        }
-   
+function updateScoreMessage(winner, playerSelection, computerSelection) {
+  let txtMessage = '';
+  if (winner === 'player') {
+    scoreMessage.textContent = 'You win! Selection: ' + flCapital(playerSelection) + ' beats ' + flCapital(computerSelection) + '!';
+    return;
+  }
+  if (winner === 'computer') {
+    scoreMessage.textContent = 'You lose! Selection: ' + flCapital(computerSelection) + ' beats ' + flCapital(playerSelection) + '!';
+    return;
+  }
+  scoreMessage.textContent = 'Your selection: ' + flCapital(playerSelection) + ' ties with ' + flCapital(computerSelection) + '!';
+}
+
+function flCapital(str) {
+  if (!str) return;
+  return str.match("^[a-z]") ? str.charAt(0).toUpperCase() + str.substring(1) : str;
+}

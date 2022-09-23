@@ -5,24 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/rcz1ikf.css">
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="https://kit.fontawesome.com/4c536a6bd5.js" crossorigin="anonymous">
+    </script>
     <title>Rock Paper Scissors</title>
-    <script src="script.js" defer></script>
 
 </head>
 
 <body>
-    <div>
-        <h3 class="player-score">Player Score:0</h3>
-        <h3 class="computer-score">Computer Score:0</h3>
+
+    <header class="heading">
+        <h1>ROCK PAPER SCISSORS</h1>
+    </header>
+
+    <div class="rps">
+        <h2>CHOOSE YOUR WEAPON</h2>
+        <h3 class="score-message" id="scoreMessage">
+            FIRST TO SCORE 5 POINTS WINS THE GAME
+        </h3>
     </div>
 
-    <div class="container">
-        <button class="rock">Rock</button>
-        <button class="paper">Paper</button>
-        <button class="scissors">Scissors</button>
+    <div class="score-container">
+        <div class="score-box">
+            <div class="sign" id="playerSign">❔</div>
+            <!-- added data-score attribute -->
+            <h2 class="score" id="playerScore" data-score="0">PLAYER:0</h2>
+        </div>
+        <div class="score-box">
+            <div class="sign" id="computerSign">❔</div>
+            <!-- added data-score attribute -->
+            <h2 class="score" id="computerScore" data-score="0">COMPUTER:0</h2>
+        </div>
+    </div>
+
+    <div class="button-box">
+        <input type="image" src="./images/Rock.png" id="rockBtn">
+        <input type="image" src="./images/Paper.png" id="paperBtn">
+        <input type="image" src="./images/Scissors.png" id="scissorsBtn">
     </div>
 
 </body>
+
 
 
 </html>
